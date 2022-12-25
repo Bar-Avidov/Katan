@@ -12,10 +12,10 @@ public class Board {
 
 	
 	Hexagon[]hexagons = new Hexagon[19];
-	
-	private Vertex[][] vertices = new Vertex[19][6];
-	private Edge[][] edges = new Edge[19][6];
-	private List<Player> players;
+	Hexagon bandit = hexagons[9];
+	public Vertex[][] vertices = new Vertex[19][6];
+	public Edge[][] edges = new Edge[19][6];
+	public List<Player> players;
 	
 	public Board(List<Player> players) {
 		
@@ -111,12 +111,70 @@ public class Board {
 				
 
 			}
+			
+			
+			
 		}
+		Harbour []harbours = new Harbour[9];
+		
+		
+		harbours[0] = new Harbour(Enums.resource.sheep);
+		harbours[1] = new Harbour(null);
+		harbours[2] = new Harbour(Enums.resource.basalt);
+		harbours[3] = new Harbour(Enums.resource.wheat);
+		harbours[4] = new Harbour(null);
+		harbours[5] = new Harbour(Enums.resource.wood);
+		harbours[6] = new Harbour(Enums.resource.clay);
+		harbours[7] = new Harbour(null);
+		harbours[8] = new Harbour(null);
+		
+		vertices[0][1].harbour = harbours[0];
+		vertices[1][0].harbour = harbours[0];
+		
+		vertices[3][1].harbour = harbours[1];
+		vertices[3][1].harbour = harbours[1];
+		
+		vertices[6][0].harbour = harbours[2];
+		vertices[6][1].harbour = harbours[2];
+		
+		vertices[14][1].harbour = harbours[3];
+		vertices[14][2].harbour = harbours[3];
+		
+		vertices[17][2].harbour = harbours[4];
+		vertices[17][3].harbour = harbours[4];
+		
+		vertices[16][3].harbour = harbours[5];
+		vertices[16][4].harbour = harbours[5];
+		
+		vertices[12][3].harbour = harbours[6];
+		vertices[12][4].harbour = harbours[6];
+		
+		vertices[7][4].harbour = harbours[7];
+		vertices[7][5].harbour = harbours[7];
+		
+		vertices[3][5].harbour = harbours[8];
+		vertices[3][5].harbour = harbours[8];
+
+		
+		
+		
 		
 		
 		
 		
 	}
+	
+	
+	public List<Enums.resource> GetResourcesFromVertex(int hexagon, int vertex){
+		List<Enums.resource> resourceList = new ArrayList<>();
+		
+		for (Map.Entry<Integer, Integer> overlaps : this.vertices[hexagon][vertex].overlap.entrySet()) {
+			resourceList.add(hexagons[overlaps.getKey()].resource);
+		}
+		
+		return resourceList;
+	}
+	
 	private List<Enums.resource> resourcesList () {
 		
 		List<Enums.resource> resourceList = new ArrayList<Enums.resource>();

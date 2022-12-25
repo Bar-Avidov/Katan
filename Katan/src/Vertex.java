@@ -2,7 +2,8 @@
 
 public class Vertex extends Board_item{
 	
-	public boolean isHarbour;
+	public Harbour harbour = null;
+	
 	
 	
 	//special trade

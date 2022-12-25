@@ -13,6 +13,26 @@ public class Enums {
 		Road,
 		Village,
 		Town,
-		DevelopmentCard
+		DevelopmentCard,
+	}
+	
+	public enum PlayerActions{
+		BuildRoad,
+		BuildVillage,
+		BuildTown,
+		BuyDevelopmentCard,
+		OpenDevelopmentCard,
+		TradeCards,
+		ExchangeCards,
+		DoNothing,
+	}
+	
+	public enum DevelopmentCardTypes{
+		Knight,
+		VictoryPoint,
+		BuildRoads,
+		YearOfWealth,
+		Monopoly,
+		
 	}
 }

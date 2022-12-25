@@ -9,11 +9,13 @@ public class Player {
 	String name;
 	int id;
 	int points;
+	
 	List<Structure> structures;
+	List<Development_Card> developmentCards = new ArrayList<Development_Card>();
 
 	Map<Enums.resource, Integer> hand = new HashMap<>();
 	Map<Integer, Map<Enums.resource, Integer>> mapValueToResource;
-	
+	Map<Enums.resource, Integer> ExchangeRates = new HashMap<>();
 	
 	public Player(String name) {
 		this.name = name;
@@ -23,16 +25,28 @@ public class Player {
 		
 		
 		
+		
 		for (Enums.resource res : Enums.resource.values()) {
 			hand.put(res, 0);
+			ExchangeRates.put(res, 4);
 		}
 	}
+	
 	public void addResource(Enums.resource resource) {
 		this.hand.put(resource, this.hand.get(resource) + 1);
 	}
 	
 	public int getNextId() {
 		return ++num;
+	}
+	
+	public boolean ExchageCards(Enums.resource requested, Enums.resource give) {
+		if (hand.get(give) >= ExchangeRates.get(give)) {
+			hand.put(give, hand.get(give) - ExchangeRates.get(give));
+			hand.put(requested, hand.get(requested) + 1);
+			return true;
+		}
+		return false;
 	}
 	
 	public void addMapValueToResource(int num, Enums.resource resource, int count) {
@@ -52,6 +66,11 @@ public class Player {
 		
 		
 	}
+	
+	public void addDevelopmentCard(Development_Card card) {
+		developmentCards.add(card);
+	}
+	
 	public void addCardsToPlayer(int num) {
 		
 		if (this.mapValueToResource.containsKey(num)) {
@@ -61,7 +80,6 @@ public class Player {
 				hand.put(a.getKey(), count + a.getValue());
 			}
 		}
-		
 	}
 	public void addPoint(int point) {
 		points = points + point;
